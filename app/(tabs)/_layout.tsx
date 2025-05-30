@@ -20,6 +20,7 @@ export default function TabLayout() {
         tabBarInactiveTintColor: colorScheme === "dark" ? "#8899A6" : "#657786",
         tabBarStyle: {
           backgroundColor: colorScheme === "dark" ? "#15202B" : "#FFFFFF",
+          borderColor: "transparent",
         },
         tabBarLabelStyle: {
           fontSize: 8,
