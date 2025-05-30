@@ -1,5 +1,6 @@
 node_modules
 android
+ios
 .expo
 .vscode
 ignite/ignite.json
