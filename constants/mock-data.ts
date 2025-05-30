@@ -1,4 +1,14 @@
-export const ANNOUNCEMENTS = [
+export interface Announcement {
+  id: string;
+  title: string;
+  content: string;
+  date: string;
+  author: string;
+  important: boolean;
+  image?: string;
+}
+
+export const ANNOUNCEMENTS: Announcement[] = [
   {
     id: "1",
     title: "Assemblée Générale",

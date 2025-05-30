@@ -3,27 +3,26 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useState } from "react";
-import { ANNOUNCEMENTS } from "@/constants";
+import { Announcement, ANNOUNCEMENTS } from "@/constants";
 import { Image } from "expo-image";
+import { useThemeStyles } from "@/hooks";
 
 export default function Home() {
   const [refreshing, setRefreshing] = useState(false);
-  const [announcements] = useState(ANNOUNCEMENTS);
-  const colorScheme = useColorScheme();
+  const [announcements] = useState<Announcement[] | null>(ANNOUNCEMENTS);
+  const { colors, typography } = useThemeStyles();
 
   const onRefresh = () => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 1000);
+    setTimeout(() => setRefreshing(false), 1000);
   };
 
   const formatDate = (dateString: string) => {
@@ -37,186 +36,70 @@ export default function Home() {
     });
   };
 
-  return (
-    <SafeAreaView
-      style={[
-        styles.container,
-        { backgroundColor: colorScheme === "dark" ? "#15202B" : "#F5F8FA" },
-      ]}
+  const renderAnnouncementCard = (announcement: Announcement, important = false) => (
+    <TouchableOpacity
+      key={announcement.id}
+      style={[styles.announcementCard, { backgroundColor: colors.card }]}
     >
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={[
-            styles.searchBar,
-            { backgroundColor: colorScheme === "dark" ? "#253341" : "#E1E8ED" },
-          ]}
+      {announcement.image && (
+        <Image source={{ uri: announcement.image }} style={styles.announcementImage} />
+      )}
+      <View style={styles.announcementContent}>
+        {important && (
+          <View style={[styles.importantBadge, { backgroundColor: colors.important }]}>
+            <Text style={typography.badge as TextStyle}>Important</Text>
+          </View>
+        )}
+        <Text style={[typography.title, { color: colors.text }]}>{announcement.title}</Text>
+        <Text
+          numberOfLines={2}
+          style={[typography.text, { color: colors.subtext, marginBottom: 8 }]}
         >
-          <FontAwesome6
-            name="magnifying-glass"
-            size={18}
-            color={colorScheme === "dark" ? "#8899A6" : "#657786"}
-          />
-          <Text
-            style={[styles.searchText, { color: colorScheme === "dark" ? "#8899A6" : "#657786" }]}
-          >
-            Rechercher...
+          {announcement.content}
+        </Text>
+        <View style={styles.announcementMeta}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+            <FontAwesome name="clock-o" size={14} color={colors.subtext} />
+            <Text style={[styles.announcementDate, { color: colors.subtext }]}>
+              {formatDate(announcement.date)}
+            </Text>
+          </View>
+          <Text style={[typography.author as TextStyle, { color: colors.subtext }]}>
+            {announcement.author}
           </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={styles.header}>
+        <TouchableOpacity style={[styles.searchBar, { backgroundColor: colors.searchBar }]}>
+          <FontAwesome6 name="magnifying-glass" size={18} color={colors.subtext} />
+          <Text style={[styles.searchText, { color: colors.subtext }]}>Rechercher...</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.notificationButton}>
-          <FontAwesome name="bell" size={24} color="#007FFF" />
+          <FontAwesome name="bell" size={24} color={colors.primary} />
         </TouchableOpacity>
       </View>
+
       <ScrollView
         style={styles.content}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         <View style={styles.announcementsSection}>
-          <Text
-            style={[styles.sectionTitle, { color: colorScheme === "dark" ? "#FFFFFF" : "#14171A" }]}
-          >
+          <Text style={[typography.title, { color: colors.text, marginBottom: 12 }]}>
             Annonces importantes
           </Text>
-          {announcements
-            .filter((a) => a.important)
-            .map((announcement) => (
-              <TouchableOpacity
-                key={announcement.id}
-                style={[
-                  styles.announcementCard,
-                  {
-                    backgroundColor: colorScheme === "dark" ? "#192734" : "#FFFFFF",
-                  },
-                ]}
-              >
-                {announcement.image && (
-                  <Image source={{ uri: announcement.image }} style={styles.announcementImage} />
-                )}
-                <View style={styles.announcementContent}>
-                  <View style={styles.importantBadge}>
-                    <Text style={styles.importantText}>Important</Text>
-                  </View>
-                  <Text
-                    style={[
-                      styles.announcementTitle,
-                      { color: colorScheme === "dark" ? "#FFFFFF" : "#14171A" },
-                    ]}
-                  >
-                    {announcement.title}
-                  </Text>
-                  <Text
-                    style={[
-                      styles.announcementText,
-                      { color: colorScheme === "dark" ? "#8899A6" : "#657786" },
-                    ]}
-                    numberOfLines={2}
-                  >
-                    {announcement.content}
-                  </Text>
-                  <View style={styles.announcementMeta}>
-                    <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-                      <FontAwesome
-                        name="clock-o"
-                        size={14}
-                        color={colorScheme === "dark" ? "#8899A6" : "#657786"}
-                      />
-                      <Text
-                        style={[
-                          styles.announcementDate,
-                          {
-                            color: colorScheme === "dark" ? "#8899A6" : "#657786",
-                          },
-                        ]}
-                      >
-                        {formatDate(announcement.date)}
-                      </Text>
-                    </View>
-                    <Text
-                      style={[
-                        styles.announcementAuthor,
-                        {
-                          color: colorScheme === "dark" ? "#8899A6" : "#657786",
-                        },
-                      ]}
-                    >
-                      {announcement.author}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            ))}
+          {announcements?.filter((a) => a.important).map((a) => renderAnnouncementCard(a, true))}
         </View>
+
         <View style={styles.announcementsSection}>
-          <Text
-            style={[styles.sectionTitle, { color: colorScheme === "dark" ? "#FFFFFF" : "#14171A" }]}
-          >
+          <Text style={[typography.title, { color: colors.text, marginBottom: 12 }]}>
             Autres annonces
           </Text>
-
-          {announcements
-            .filter((a) => !a.important)
-            .map((announcement) => (
-              <TouchableOpacity
-                key={announcement.id}
-                style={[
-                  styles.announcementCard,
-                  {
-                    backgroundColor: colorScheme === "dark" ? "#192734" : "#FFFFFF",
-                  },
-                ]}
-              >
-                {announcement.image && (
-                  <Image source={{ uri: announcement.image }} style={styles.announcementImage} />
-                )}
-                <View style={styles.announcementContent}>
-                  <Text
-                    style={[
-                      styles.announcementTitle,
-                      { color: colorScheme === "dark" ? "#FFFFFF" : "#14171A" },
-                    ]}
-                  >
-                    {announcement.title}
-                  </Text>
-                  <Text
-                    style={[
-                      styles.announcementText,
-                      { color: colorScheme === "dark" ? "#8899A6" : "#657786" },
-                    ]}
-                    numberOfLines={2}
-                  >
-                    {announcement.content}
-                  </Text>
-                  <View style={styles.announcementMeta}>
-                    <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-                      <FontAwesome
-                        name="clock-o"
-                        size={14}
-                        color={colorScheme === "dark" ? "#8899A6" : "#657786"}
-                      />
-                      <Text
-                        style={[
-                          styles.announcementDate,
-                          {
-                            color: colorScheme === "dark" ? "#8899A6" : "#657786",
-                          },
-                        ]}
-                      >
-                        {formatDate(announcement.date)}
-                      </Text>
-                    </View>
-                    <Text
-                      style={[
-                        styles.announcementAuthor,
-                        {
-                          color: colorScheme === "dark" ? "#8899A6" : "#657786",
-                        },
-                      ]}
-                    >
-                      {announcement.author}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            ))}
+          {announcements?.filter((a) => !a.important).map((a) => renderAnnouncementCard(a))}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -224,9 +107,7 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -252,18 +133,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
   },
-  welcomeCard: {
-    marginVertical: 16,
-    paddingVertical: 12,
-  },
   announcementsSection: {
     marginVertical: 16,
     paddingVertical: 12,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontFamily: "Poppins-Medium",
-    marginBottom: 12,
   },
   announcementCard: {
     borderRadius: 12,
@@ -283,27 +155,10 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   importantBadge: {
-    backgroundColor: "#FF3B30",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 20,
     alignSelf: "flex-start",
-    marginBottom: 8,
-  },
-  importantText: {
-    color: "white",
-    fontSize: 12,
-    fontWeight: "600",
-  },
-  announcementTitle: {
-    fontSize: 18,
-    fontFamily: "Poppins-Medium",
-    marginBottom: 8,
-  },
-  announcementText: {
-    fontSize: 12,
-    lineHeight: 20,
-    fontFamily: "Poppins-Regular",
     marginBottom: 8,
   },
   announcementMeta: {
@@ -313,9 +168,5 @@ const styles = StyleSheet.create({
   },
   announcementDate: {
     fontSize: 12,
-  },
-  announcementAuthor: {
-    fontSize: 12,
-    fontWeight: "500",
   },
 });
