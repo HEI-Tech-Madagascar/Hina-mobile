@@ -9,7 +9,13 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        headerStyle: {
+          backgroundColor: colorScheme === "dark" ? "#15202B" : "#FFFFFF",
+        },
+        headerTitleStyle: {
+          fontFamily: "Poppins-Bold",
+          color: colorScheme === "dark" ? "#FFFFFF" : "#14171A",
+        },
         tabBarActiveTintColor: "#007FFF",
         tabBarInactiveTintColor: colorScheme === "dark" ? "#8899A6" : "#657786",
         tabBarStyle: {
@@ -24,14 +30,14 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Accueil",
+          title: "Hina",
           tabBarIcon: ({ color, size }) => <FontAwesome name="home" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
         name="club"
         options={{
-          title: "Vie du Club",
+          title: "Vie du club",
           tabBarIcon: ({ color, size }) => <FontAwesome name="users" size={size} color={color} />,
         }}
       />
