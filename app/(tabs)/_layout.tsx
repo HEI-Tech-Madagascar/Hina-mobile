@@ -1,7 +1,7 @@
 import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
-import { useColorScheme } from "react-native";
+import { TouchableOpacity, useColorScheme, View } from "react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -33,6 +33,16 @@ export default function TabLayout() {
         options={{
           title: "Hina",
           tabBarIcon: ({ color, size }) => <FontAwesome name="home" size={size} color={color} />,
+          headerRight: () => (
+            <View style={{ gap: 20, flexDirection: "row" }}>
+              <TouchableOpacity style={{ marginRight: 16 }}>
+                <Entypo name="magnifying-glass" size={24} color="#FFF" />
+              </TouchableOpacity>
+              <TouchableOpacity style={{ marginRight: 16 }}>
+                <FontAwesome name="bell" size={24} color="#007FFF" />
+              </TouchableOpacity>
+            </View>
+          ),
         }}
       />
       <Tabs.Screen

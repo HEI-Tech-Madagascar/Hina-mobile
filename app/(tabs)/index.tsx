@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { FontAwesome6 } from "@expo/vector-icons";
 import { useState } from "react";
 import { Announcement, ANNOUNCEMENTS } from "@/constants";
 import { Image } from "expo-image";
@@ -74,33 +73,27 @@ export default function Home() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-      <View style={styles.header}>
-        <TouchableOpacity style={[styles.searchBar, { backgroundColor: colors.searchBar }]}>
-          <FontAwesome6 name="magnifying-glass" size={18} color={colors.subtext} />
-          <Text style={[styles.searchText, { color: colors.subtext }]}>Rechercher...</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.notificationButton}>
-          <FontAwesome name="bell" size={24} color={colors.primary} />
-        </TouchableOpacity>
+      <View style={styles.welcomeCard}>
+        <Text style={[typography.title, { color: colors.text }]}>
+          Bienvenue sur l&#39;app HEI Tech
+        </Text>
+        <Text style={[typography.text, { color: colors.subtext }]}>
+          Restez connecté avec toute l&#39;actualité du club
+        </Text>
       </View>
-
       <ScrollView
         style={styles.content}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
-        <View style={styles.announcementsSection}>
-          <Text style={[typography.title, { color: colors.text, marginBottom: 12 }]}>
-            Annonces importantes
-          </Text>
-          {announcements?.filter((a) => a.important).map((a) => renderAnnouncementCard(a, true))}
-        </View>
+        <Text style={[typography.title, { color: colors.text, marginBottom: 12 }]}>
+          Annonces importantes
+        </Text>
+        {announcements?.filter((a) => a.important).map((a) => renderAnnouncementCard(a, true))}
 
-        <View style={styles.announcementsSection}>
-          <Text style={[typography.title, { color: colors.text, marginBottom: 12 }]}>
-            Autres annonces
-          </Text>
-          {announcements?.filter((a) => !a.important).map((a) => renderAnnouncementCard(a))}
-        </View>
+        <Text style={[typography.title, { color: colors.text, marginBottom: 12 }]}>
+          Autres annonces
+        </Text>
+        {announcements?.filter((a) => !a.important).map((a) => renderAnnouncementCard(a))}
       </ScrollView>
     </SafeAreaView>
   );
@@ -108,40 +101,17 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
+  welcomeCard: {
+    marginBottom: 20,
     paddingHorizontal: 16,
-  },
-  searchBar: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
-  },
-  searchText: {
-    marginLeft: 8,
-    fontSize: 14,
-  },
-  notificationButton: {
-    marginLeft: 12,
-    padding: 8,
   },
   content: {
-    flex: 1,
     paddingHorizontal: 16,
-  },
-  announcementsSection: {
-    marginVertical: 16,
-    paddingVertical: 12,
   },
   announcementCard: {
     borderRadius: 12,
     marginBottom: 16,
     overflow: "hidden",
-    elevation: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
