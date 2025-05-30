@@ -1,15 +1,7 @@
-import { Text, View } from "react-native";
+import { Redirect } from "expo-router";
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Hello from HEI Tech.</Text>
-    </View>
-  );
+  const isLoggedIn = true;
+
+  return isLoggedIn ? <Redirect href="/(tabs)" /> : <Redirect href="/login" />;
 }

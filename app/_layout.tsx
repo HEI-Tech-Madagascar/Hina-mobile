@@ -7,6 +7,8 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
+import { Platform } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -30,5 +32,17 @@ export default function RootLayout() {
     return null;
   }
 
-  return <Stack />;
+  return (
+    <>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          animation: Platform.OS === "android" ? "fade_from_bottom" : "default",
+        }}
+      >
+        <Stack.Screen name="(tabs)" />
+      </Stack>
+      <StatusBar style="auto" />
+    </>
+  );
 }
