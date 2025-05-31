@@ -61,6 +61,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="club"
         options={{
+          headerShown: false,
+
           title: "Vie du club",
           tabBarIcon: tabIcon("users", "FontAwesome"),
         }}

@@ -40,3 +40,42 @@ export const ANNOUNCEMENTS: Announcement[] = [
       "https://images.pexels.com/photos/7014337/pexels-photo-7014337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
 ];
+
+export const POSTS = [
+  {
+    id: "1",
+    author: "Marion Rakoto",
+    avatar:
+      "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    content:
+      "Super événement hier! Merci à tous les participants du hackathon, c'était vraiment une réussite. Hâte de voir les projets se développer davantage.",
+    images: [
+      "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    ],
+    timestamp: "2h",
+    likes: 24,
+    comments: 5,
+  },
+  {
+    id: "2",
+    author: "Département Communication",
+    avatar:
+      "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    content:
+      "Les inscriptions pour le concours de design sont maintenant ouvertes! Envoyez vos propositions avant le 15 décembre. Plus d'infos dans le lien en bio.",
+    timestamp: "5h",
+    likes: 17,
+    comments: 3,
+  },
+  {
+    id: "3",
+    author: "Jean Razafindrakoto",
+    avatar:
+      "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    content:
+      "Cherche des volontaires pour notre prochaine action sociale le weekend prochain. On va aider à installer des ordinateurs dans une école primaire. Qui est partant?",
+    timestamp: "1j",
+    likes: 32,
+    comments: 14,
+  },
+];
