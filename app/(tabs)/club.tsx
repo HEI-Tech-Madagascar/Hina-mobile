@@ -62,7 +62,7 @@ export default function Club() {
           <View style={styles.createPostHeader}>
             <Image
               source={{
-                uri: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                uri: "https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/499946780_1258701665590990_8095563758685064786_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEBtHgmt4BzLgJ8YsrBidTRqqSxGa_uzw-qpLEZr-7PDzmtwV8-C06ebdbPAgRYQ7oaq6tWZ_V9y-h2x57eRgVk&_nc_ohc=n-nGafySkl8Q7kNvwEhn_e7&_nc_oc=AdmX_-TJtcr9Yaz15Qkj5Crnvip5v45SVgcXTN-T3IydgnH1KreXGmnJHFdJdZz1x44Ql3G3jkPERbSKq91IQLGy&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=cBY9xJFumEDTwRf5d83xYw&oh=00_AfIiJKAOO3KKWs1pWkA6FLyYFm5GvTU9Q6NaQ7gpQRQnGQ&oe=6842565E",
               }}
               style={styles.userAvatar}
             />

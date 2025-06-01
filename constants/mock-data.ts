@@ -8,6 +8,12 @@ export interface Announcement {
   image?: string;
 }
 
+export interface Task {
+  id: string;
+  text: string;
+  completed: boolean;
+}
+
 export const ANNOUNCEMENTS: Announcement[] = [
   {
     id: "1",
@@ -44,13 +50,13 @@ export const ANNOUNCEMENTS: Announcement[] = [
 export const POSTS = [
   {
     id: "1",
-    author: "Marion Rakoto",
+    author: "Fiantso Ravoajanahary",
     avatar:
-      "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/499946780_1258701665590990_8095563758685064786_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEBtHgmt4BzLgJ8YsrBidTRqqSxGa_uzw-qpLEZr-7PDzmtwV8-C06ebdbPAgRYQ7oaq6tWZ_V9y-h2x57eRgVk&_nc_ohc=n-nGafySkl8Q7kNvwEhn_e7&_nc_oc=AdmX_-TJtcr9Yaz15Qkj5Crnvip5v45SVgcXTN-T3IydgnH1KreXGmnJHFdJdZz1x44Ql3G3jkPERbSKq91IQLGy&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=cBY9xJFumEDTwRf5d83xYw&oh=00_AfIiJKAOO3KKWs1pWkA6FLyYFm5GvTU9Q6NaQ7gpQRQnGQ&oe=6842565E",
     content:
       "Super événement hier! Merci à tous les participants du hackathon, c'était vraiment une réussite. Hâte de voir les projets se développer davantage.",
     images: [
-      "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/498994910_122131063820781282_5738561342159986846_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGdvCEWO-0HYiJ_s6V_Z4prLOqoOtwkh-gs6qg63CSH6FfnhUe1PmYOfkdOQ1xywdxqq0xPb5dHTdIC_0_JLxq2&_nc_ohc=S8-SCZ-zPfAQ7kNvwEKe5j-&_nc_oc=Adm9Gam4PvJ6kRcpO9IFY1SoEhD01s0pmXWX9DN6rlPAYgbqKKzqguFYtMJpdb1dDFEm8mUO3bRuYxKieJMhLdJp&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=2I-QXz0CBTm2BC1Cc4tBQA&oh=00_AfInd2GHQTFjVN72S-D15kex7yN4jGN83nDdIZWayzHddA&oe=684257A7",
     ],
     timestamp: "2h",
     likes: 24,
@@ -58,24 +64,30 @@ export const POSTS = [
   },
   {
     id: "2",
-    author: "Département Communication",
+    author: "Harena Fiantso",
     avatar:
-      "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/499946780_1258701665590990_8095563758685064786_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEBtHgmt4BzLgJ8YsrBidTRqqSxGa_uzw-qpLEZr-7PDzmtwV8-C06ebdbPAgRYQ7oaq6tWZ_V9y-h2x57eRgVk&_nc_ohc=n-nGafySkl8Q7kNvwEhn_e7&_nc_oc=AdmX_-TJtcr9Yaz15Qkj5Crnvip5v45SVgcXTN-T3IydgnH1KreXGmnJHFdJdZz1x44Ql3G3jkPERbSKq91IQLGy&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=cBY9xJFumEDTwRf5d83xYw&oh=00_AfIiJKAOO3KKWs1pWkA6FLyYFm5GvTU9Q6NaQ7gpQRQnGQ&oe=6842565E",
     content:
-      "Les inscriptions pour le concours de design sont maintenant ouvertes! Envoyez vos propositions avant le 15 décembre. Plus d'infos dans le lien en bio.",
+      "WOW, déjà le premier juin. Le temps passe tellement vite que je n'ai même pas pu profiter à fond de ces 6 derniers mois",
     timestamp: "5h",
     likes: 17,
     comments: 3,
   },
   {
     id: "3",
-    author: "Jean Razafindrakoto",
+    author: "Fiantso Harena",
     avatar:
-      "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/499946780_1258701665590990_8095563758685064786_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEBtHgmt4BzLgJ8YsrBidTRqqSxGa_uzw-qpLEZr-7PDzmtwV8-C06ebdbPAgRYQ7oaq6tWZ_V9y-h2x57eRgVk&_nc_ohc=n-nGafySkl8Q7kNvwEhn_e7&_nc_oc=AdmX_-TJtcr9Yaz15Qkj5Crnvip5v45SVgcXTN-T3IydgnH1KreXGmnJHFdJdZz1x44Ql3G3jkPERbSKq91IQLGy&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=cBY9xJFumEDTwRf5d83xYw&oh=00_AfIiJKAOO3KKWs1pWkA6FLyYFm5GvTU9Q6NaQ7gpQRQnGQ&oe=6842565E",
     content:
-      "Cherche des volontaires pour notre prochaine action sociale le weekend prochain. On va aider à installer des ordinateurs dans une école primaire. Qui est partant?",
+      "Bonjour! Aujourd'hui est le dernier jours du mois de Mai 2025 et je suis content de faire post",
     timestamp: "1j",
     likes: 32,
     comments: 14,
   },
+];
+
+export const TASKS = [
+  { id: "1", text: "Faire devoir de PROG2", completed: false },
+  { id: "2", text: "Réviser pour l'examen de WEB2", completed: false },
+  { id: "3", text: "Préparer la présentation", completed: true },
 ];
